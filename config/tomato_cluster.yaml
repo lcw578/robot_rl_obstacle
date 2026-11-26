@@ -1,0 +1,45 @@
+# tomato_cluster.yaml —— MuJoCo 番茄串生成参数
+# 尺寸口径 = 论文 2.2 的 100 株实测最大横径（§6 校准）
+# 形态细节 2026-10-30 依论文图与植物学修正：果穗竖直下垂、果梗可见弯、主茎可倾斜
+#
+# 冻结数据集保留生成时的参数。修改本文件后可用 drl/prepare_paper_dataset.py 生成新的数据集。
+
+main_stem:
+  diameter: 0.014            # 主茎 φ14mm（论文视觉侧的"200 像素"是掩码包围盒，非物理尺寸）
+  tilt_deg: [-30, 30 ]        # 主茎相对竖直的有符号倾角；经过P0的果梗竖直平面独立随机
+  seg_above: [0.15, 0.15]    # P0→M1 主茎段长（M1 在结合点上方）
+  seg_below: [0.15, 0.15]    # P0→M2 主茎段长
+
+peduncle:
+  diameter: 0.006            # 果梗 φ6mm
+  len_first: [0.03, 0.05]    # P0→P3 首段长（HOPP 的 p 方向，式 1）
+  len_second: [0.03, 0.05]   # P3→P4 第二段长
+  eta_deg: [70, 150]         # η：主茎方向与果梗首段夹角（式 1）
+  droop_deg: [15, 50]        # 在果梗竖直平面内继续旋转的角度；达到max_bend_deg时截断
+  max_bend_deg: 270.0       # 第二段有向累计转角上限；从主茎在果梗平面内的投影方向起算
+
+cluster:
+  berry_diameter: 0.025      # 果实最大横径 25mm（果穗=单个长方体包络）
+  size_along: [0.12, 0.20]   # 盒沿竖直下垂方向的长
+  size_side1: [0.05, 0.07]   # 盒宽 1
+  size_side2: [0.05, 0.07]   # 盒宽 2
+  hang_tilt_deg: [0, 10]     # 果穗竖直向下 + 沿果梗方向倾斜（≤10°）
+  peduncle_attachment_length: 0.010  # P4附近末端1cm允许胶囊接合；轴线仍不得进入盒内部，其余果梗不得穿盒
+
+randomize:
+  rigid_rot_std_deg: 20      # 遗留字段，当前不使用；主茎倾角请改 main_stem.tilt_deg
+  place_x: [0.30, 0.60]      # P0 在世界系的放置范围（i5 可达区，M0 标定）
+  place_y: [-0.20, 0.20]
+  place_z: [0.30, 1.00]
+
+sim:
+  timestep: 0.002
+  self_collision: true       # 默认启用臂/夹剪自碰撞；仅排除self_collision.yaml中的相邻安装关系
+  weld_solref: "0.005 1"     # weld 软约束（时间常数s, 阻尼比）。A/B 实测定稿：
+                             # 0.02 1→滞后11.7mm/稳态0.72mm；0.005 1→2.9mm/0.05mm
+                             # （时间常数≥2×timestep 才稳，再硬用 "0.003 1"，自担风险）
+  weld_solimp: "0.95 0.99 0.001 0.5 2"  # 加装夹剪后调高约束阻抗，减少TCP跟随滞后
+
+grasp:                       # 供模块二 HOPP / 模块三奖励使用（场景本身不用）
+  d_stem: 0.020              # Pg到主茎轴线的垂距：0.020m=2cm（本平台工具适配，论文为1cm）；不是夹剪整体间隙。
+  zone_r: 0.150              # 目标采收区半球半径（式 3 的 r）

@@ -1,0 +1,245 @@
+{
+  "box_local": {
+    "center": [
+      0.04829172472853921,
+      0.028060335431678407,
+      -0.15248202603550887
+    ],
+    "half": [
+      0.08922423633456988,
+      0.02741495449321658,
+      0.03254479745901863
+    ],
+    "quat": [
+      -0.014693372335446556,
+      0.730946582583327,
+      0.013712243523914324,
+      -0.682138675488136
+    ]
+  },
+  "generation_info": {
+    "attempts": 3,
+    "peduncle_box": {
+      "attachment_length_m": 0.01,
+      "first_axis_inside_box_m": 0.0,
+      "first_surface_clearance_m": 0.032271972458368145,
+      "second_axis_inside_box_m": 0.0,
+      "second_exposed_surface_clearance_m": 0.006837056798840324,
+      "valid": true
+    },
+    "rejection_counts": {
+      "peduncle_box_overlap": 1,
+      "stem_box_clearance": 1
+    },
+    "whole_robot_constraints": {
+      "attempts": 1,
+      "metrics": {
+        "box_min_front_m": -0.1286447502072575,
+        "box_sector_margin_deg": -68.96728916744684,
+        "first_peduncle_azimuth_deg": 124.3480011954664,
+        "front_direction_base": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "infinite_stem_box_clearance_m": 0.02419484417747527,
+        "infinite_stem_second_peduncle_clearance_m": 0.037402505309715915,
+        "normal_toward_vehicle_base": [
+          0.0,
+          -0.9546684252297352,
+          0.2976712916446218
+        ],
+        "peduncle_min_front_m": -0.04228805396906963,
+        "peduncle_sector_margin_deg": -36.48951925127648
+      },
+      "options": {
+        "azimuth_filter_enabled": false,
+        "azimuth_range_deg": [
+          -90.0,
+          90.0
+        ],
+        "front_direction_base": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "front_reference": "row_direction",
+        "infinite_stem": false,
+        "max_generation_attempts": 200,
+        "observer_xy_base_m": [
+          0.0,
+          0.0
+        ]
+      },
+      "rejection_counts": {},
+      "scene_version": "row_harvest_side_top_approach_v4"
+    }
+  },
+  "grasp_point_base_m": [
+    -0.14562086516785766,
+    0.5901923935012776,
+    0.7498734431923653
+  ],
+  "keypoints_base_m": {
+    "M1": [
+      -0.11417297144855931,
+      0.6291497298159373,
+      0.8943342176664247
+    ],
+    "M2": [
+      -0.19147548019789284,
+      0.5428639038529479,
+      0.6176049666304275
+    ],
+    "P0": [
+      -0.15282422582322608,
+      0.5860068168344427,
+      0.7559695921484261
+    ],
+    "P3": [
+      -0.11867849165183608,
+      0.6058474988518295,
+      0.7270723188225768
+    ],
+    "P4": [
+      -0.1106887595813918,
+      0.61049000361152,
+      0.6924272582555986
+    ],
+    "TA": [
+      -0.07822152205081578,
+      0.6377925697343634,
+      0.6957726942144237
+    ],
+    "TB": [
+      -0.13084348013855807,
+      0.5903417347978788,
+      0.5112024380114107
+    ]
+  },
+  "keypoints_local_m": {
+    "M1": [
+      0.03865125437466673,
+      0.04314291298149469,
+      0.13836462551799858
+    ],
+    "M2": [
+      -0.03865125437466673,
+      -0.04314291298149469,
+      -0.13836462551799858
+    ],
+    "P0": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "P3": [
+      0.03414573417139,
+      0.01984068201738692,
+      -0.028897273325849182
+    ],
+    "P4": [
+      0.04213546624183426,
+      0.024483186777077365,
+      -0.06354233389282749
+    ],
+    "TA": [
+      0.07460270377241035,
+      0.0517857528999207,
+      -0.06019689793400239
+    ],
+    "TB": [
+      0.021980745684668068,
+      0.004334917963436116,
+      -0.24476715413701533
+    ]
+  },
+  "placement_base_m": [
+    -0.15282422582322608,
+    0.5860068168344427,
+    0.7559695921484261
+  ],
+  "plant_config": {
+    "cluster": {
+      "berry_diameter": 0.025,
+      "hang_tilt_deg": [
+        0,
+        10
+      ],
+      "peduncle_attachment_length": 0.01,
+      "size_along": [
+        0.12,
+        0.2
+      ],
+      "size_side1": [
+        0.05,
+        0.07
+      ],
+      "size_side2": [
+        0.05,
+        0.07
+      ]
+    },
+    "grasp": {
+      "d_stem": 0.01,
+      "zone_r": 0.15
+    },
+    "main_stem": {
+      "diameter": 0.014,
+      "seg_above": [
+        0.15,
+        0.15
+      ],
+      "seg_below": [
+        0.15,
+        0.15
+      ],
+      "tilt_deg": [
+        -30,
+        30
+      ]
+    },
+    "peduncle": {
+      "diameter": 0.006,
+      "droop_deg": [
+        15,
+        50
+      ],
+      "eta_deg": [
+        70,
+        150
+      ],
+      "len_first": [
+        0.03,
+        0.05
+      ],
+      "len_second": [
+        0.03,
+        0.05
+      ],
+      "max_bend_deg": 270.0
+    },
+    "randomize": {
+      "place_x": [
+        0.3,
+        0.6
+      ],
+      "place_y": [
+        -0.2,
+        0.2
+      ],
+      "place_z": [
+        0.3,
+        1.0
+      ],
+      "rigid_rot_std_deg": 20
+    },
+    "sim": {
+      "self_collision": true,
+      "timestep": 0.002,
+      "weld_solimp": "0.95 0.99 0.001 0.5 2",
+      "weld_solref": "0.005 1"
+    }
+  },
+  "scene_seed": 1000297
+}

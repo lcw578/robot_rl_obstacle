@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+MUJOCO_LOG.TXT
+/.venv/
+/.pytest_cache/
+/.env
+/runs/
+/archive/
+/references/original_paper.pdf
+/references/architecture_interpretation.pdf

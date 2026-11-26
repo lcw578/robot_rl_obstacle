@@ -1,0 +1,86 @@
+# 番茄采摘论文仿真方法的 AUBO i5 适配。
+scene_seed: 1000000
+action_mode: cartesian_pose7
+base_yaw_offset_deg: 180.0
+start_joints_deg:
+- 10.6
+- 15.2
+- 134.3
+- 118.2
+- 90.0
+- 0.0
+target_workspace:
+  reference: grasp_point
+  frame: arm_base
+  contain_bunch: false
+  # 论文 400 × 400 × 200 mm，前向距离 460 mm 映射到现有 AUBO 基座 +Y。
+  x:
+  - -0.2
+  - 0.2
+  y:
+  - 0.26
+  - 0.66
+  z:
+  - 0.62
+  - 0.82
+plant_constraints:
+  azimuth_filter_enabled: false
+  infinite_stem: false
+  max_generation_attempts: 200
+plant_geometry:
+  segment_type: cylinder
+  grasp_axis_distance_m: 0.010
+harvest_region:
+  hemisphere_direction_base:
+  - 0.0
+  - -1.0
+  - 0.0
+pregrasp:
+  standoff_m: 0.08
+  angle_range_deg:
+  - -65.0
+  - 65.0
+  angle_step_deg: 5.0
+  view_direction_base:
+  - 0.0
+  - -1.0
+  - 0.0
+open_gear_rad: -0.474
+finger_slice_m: 0.004
+control_dt: 0.2
+max_episode_steps: 50
+position_tolerance_m: 0.015
+axis_tolerance_rad: 0.05
+reward:
+  mode: paper
+paper_method:
+  observation: paper
+  translation_step_m: 0.05
+  quaternion_parameterization: normalized
+  omega: 2.0
+  haf: true
+
+pose_controller:
+  mode: mocap_weld
+  target_update: step_interpolated
+  arm_joint_damping: 3.0 # 六轴统一阻尼；也可按J1至J6填写六个值；不改夹爪阻尼
+  physics_dt: 0.002 # 物理积分步长s，每个0.2s策略周期100步
+  weld_timeconst_s: 0.02 # 等式约束响应时间s，至少2个物理步
+  weld_torquescale_m: 1.0 # 旋转残差缩放尺度m，不是力矩上限
+  gravity_compensation: true # 理想重力补偿，尚未标定真实动力学
+  position_tolerance_m: 0.0005
+  rotation_tolerance_rad: 0.005
+  safety_failure_penalty: 0.0 # 关节越限和数值异常终止回合，奖励按论文四项计算。
+
+
+paper_training:
+  dataset_manifest: datasets/paper500_approach_v3/manifest.json
+  rigid_rotation_deg: 20.0 # 论文未给出变换分布，本地采用随机轴和不超过20度的旋转。
+  replay_buffer_size: 100000 # 论文表1的 Buffer Size。
+  final_test:
+    collision_retry: false
+    position_tolerance_m: 0.015
+    axis_tolerance_rad: 0.05
+    stagnation_distance_delta_m: 0.001
+    stagnation_angle_delta_rad: 0.001
+    stagnation_consecutive_steps: 1
